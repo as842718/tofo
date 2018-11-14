@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="906.0" prefWidth="1076.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+   <children>
+      <TableView fx:id="tableview" layoutX="243.0" layoutY="141.0" prefHeight="675.0" prefWidth="793.0">
+        <columns>
+          <TableColumn fx:id="step" prefWidth="154.0" text="Step" />
+          <TableColumn fx:id="object" prefWidth="187.0" text="Object" />
+            <TableColumn fx:id="value" prefWidth="136.0" text="Value" />
+            <TableColumn fx:id="comment" prefWidth="310.0" text="Comment" />
+        </columns>
+      </TableView>
+      <MenuBar layoutX="9.0" layoutY="9.0" prefHeight="34.0" prefWidth="1058.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#OpenApp" text="Open" />
+                  <MenuItem mnemonicParsing="false" onAction="#addnewSuiteFolder" text="New TestSuite" />
+                  <MenuItem fx:id="addnewTestCasefolder" mnemonicParsing="false" text="New Test Case" />
+                  <MenuItem mnemonicParsing="false" onAction="#addnewTestDatafolder" text="Test Data" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+              <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      
+      <ComboBox fx:id="comboboxBrowser" layoutX="286.0" layoutY="100.0" onAction="#changeBrowser" prefHeight="31.0" prefWidth="149.0" promptText="Browser" />
+     
+      <ImageView fx:id="imageView" fitHeight="34.0" fitWidth="45.0" layoutX="455.0" layoutY="99.0" onMouseClicked="#RunEvent" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="buttonHtmlFile" layoutX="892.0" layoutY="97.0" mnemonicParsing="false" onAction="#resultview" prefHeight="34.0" prefWidth="104.0" text="View Report" />
+      <TreeView fx:id="ViewTree" layoutX="17.0" layoutY="173.0" prefHeight="642.0" prefWidth="225.0" />
+      <TextField fx:id="filter" layoutX="17.0" layoutY="141.0" prefHeight="31.0" prefWidth="225.0" promptText="Enter Search Text" />
+      <ImageView fx:id="addImage" fitHeight="34.0" fitWidth="45.0" layoutX="107.0" layoutY="101.0" onMouseClicked="#addItems" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="removeItem" fitHeight="34.0" fitWidth="45.0" layoutX="165.0" layoutY="101.0" onMouseClicked="#removeItems" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="play" fitHeight="34.0" fitWidth="54.0" layoutX="522.0" layoutY="97.0" onMouseClicked="#RunEvent" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="save" layoutX="788.0" layoutY="98.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="73.0" text="Save" />
+      <Button fx:id="load" layoutX="698.0" layoutY="97.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="73.0" text="Load" />
+   </children>
+</AnchorPane>
