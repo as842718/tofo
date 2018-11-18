@@ -10,11 +10,13 @@ public class UIKeywordOperation {
         this.driver = driver;
     }
     public static void perform(String operation,String objectName,String value) throws Exception{
-        System.out.println("");
-        switch (operation) {
+     
+    	switch (operation) {
+        
         case "Click":
         	keywordClass.click(objectName);
             break;
+        
         case "Enter Text":
             //Set text on control
         	keywordClass.setext(objectName, value);

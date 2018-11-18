@@ -1,7 +1,10 @@
 package application;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -153,7 +156,7 @@ public class MainController implements Initializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-			
+		
 		setTableView();
 		
 		comboboxBrowser.getItems().addAll(browserlist);
@@ -174,7 +177,8 @@ public class MainController implements Initializable {
 		ViewTree.setEditable(true);
 		ViewTree.setCellFactory(TextFieldTreeCell.forTreeView());
 		ViewTree.setRoot(root);
-		ViewTree.setShowRoot(false);		
+		ViewTree.setShowRoot(false);			
+	//String a=	ViewTree.getSelectionModel().getSelectedItem();
 		ViewTree.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
 			public void cleanCase() {
 				
@@ -188,7 +192,7 @@ public class MainController implements Initializable {
 				  
 	            TreeItem<String> selectedItem = (TreeItem<String>) newValue;
 	            System.out.println("Selected Text : " + selectedItem.getValue());
-	           
+	            
 	            if(selectedItem.getValue()=="NewCase")
 	            	cleanCase();
 	            List list = new ArrayList<String>();
@@ -463,8 +467,16 @@ public void showAlertWithoutHeaderText() {
 }
 
 public void resultview() throws IOException {
+	// printing direct to browser
+	// not support through webview
 	
-Stage primaryStage = new Stage();
+	try {
+		Desktop.getDesktop().browse(new URI("file:///F:/JavaWorkSpace/TableView/test-output/STMExtentReport.html#!"));
+	} catch (URISyntaxException e) {
+		
+		e.printStackTrace();
+	}
+/*Stage primaryStage = new Stage();
 	FXMLLoader loader  = new FXMLLoader(getClass().getResource("/result/result.fxml"));
 	Parent root = (Parent)loader.load();
 	
@@ -475,7 +487,7 @@ Stage primaryStage = new Stage();
 	
 	primaryStage.setTitle("Report");
 	primaryStage.setScene(scene);
-	primaryStage.show();
+	primaryStage.show();*/
 
 	
 }

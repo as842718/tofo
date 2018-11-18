@@ -10,8 +10,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
+import com.report.ExtentReportsClass;
 
-public class BaseClass {
+
+public class BaseClass extends ExtentReportsClass {
 	
 	//final static Logger logger =Logger.getLogger(BaseClass.class);
 	
@@ -71,6 +73,8 @@ public class BaseClass {
 
 		
 		}
+		
+		ExtentReportsClass.startReport();
 	}
 			
 

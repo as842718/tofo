@@ -1,5 +1,9 @@
 package result;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,15 +28,13 @@ public class resultController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		engine= webview.getEngine();	
+		engine= webview.getEngine();
 		
 	}
 	
 
-	public void btn1(ActionEvent event) {
-
-		engine.load("file:///F:/CreativeSpace/HybridFramework/test-output/index.html");
-
+	public void btn1(ActionEvent event) throws IOException, URISyntaxException {
+		Desktop.getDesktop().browse(new URI("file:///F:/JavaWorkSpace/TableView/test-output/STMExtentReport.html#!"));
 	}
 	
 	
