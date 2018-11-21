@@ -4,6 +4,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.annotations.Test;
+
 
 public class ActionRunner implements Runnable {
 
@@ -38,7 +40,7 @@ public class ActionRunner implements Runnable {
 	
 	
 	ArrayList<String> newdata = new ArrayList<>();
-	
+	@Test
 	public ArrayList<String>  readData() throws Exception {
 	
 		int i,j;

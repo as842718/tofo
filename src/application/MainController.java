@@ -1,4 +1,4 @@
-package application;
+ package application;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 import com.uiOperation.action.ActionRunner;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -77,6 +79,12 @@ public class MainController implements Initializable {
 	@FXML
 	public Button load;
 	
+	@FXML
+	private Button moveUp;
+	
+	@FXML
+	private Button moveDown;
+	
 	
 	public ObservableList<ActionClass> Actionlist = FXCollections.observableArrayList(
 			
@@ -106,7 +114,8 @@ public class MainController implements Initializable {
 	
 	Image icone = new Image(getClass().getResourceAsStream("/img/4.png"));
 	Image testcase_icon = new Image(getClass().getResourceAsStream("/img/edit-icon.png"));
-	
+	Image moveUp_img = new Image(getClass().getResourceAsStream("/img/up-icon.png"));
+	Image movedown_img = new Image(getClass().getResourceAsStream("/img/down-icon.png"));
 	TreeItem<String> root;
 	
 	
@@ -208,6 +217,63 @@ public class MainController implements Initializable {
 	        }
 
 	      });
+		
+	// move event for table view		
+		 ReadOnlyIntegerProperty selectedIndex = tableview.getSelectionModel().selectedIndexProperty();
+		 moveUp.setGraphic(new ImageView(moveUp_img));
+		 moveDown.setGraphic(new ImageView(movedown_img));
+		 moveUp.disableProperty().bind(selectedIndex.lessThanOrEqualTo(0));
+		 moveDown.disableProperty().bind(Bindings.createBooleanBinding(() -> {
+		        int index = selectedIndex.get();
+		        return index < 0 || index+1 >= tableview.getItems().size();
+		    }, selectedIndex, tableview.getItems()));
+		
+		 moveUp.setOnAction(evt -> {
+		        int index = tableview.getSelectionModel().getSelectedIndex();
+		        // swap items
+		        tableview.getItems().add(index-1, tableview.getItems().remove(index));
+		        // select item at new position
+		        tableview.getSelectionModel().clearAndSelect(index-1);
+		    });
+		
+		 moveDown.setOnAction(evt -> {
+		        int index = tableview.getSelectionModel().getSelectedIndex();
+		        // swap items
+		        tableview.getItems().add(index+1, tableview.getItems().remove(index));
+		        // select item at new position
+		        tableview.getSelectionModel().clearAndSelect(index+1);
+		    });
+		 
+		// tableview.setRowFactory(tcv->TableRow<ActionClass> row = new TableRow<>(););
+		 
+		
+		 tableview.setOnMouseClicked( event -> {
+			   if( event.getClickCount() == 2 ) {
+			   
+				   Stage primaryStage = new Stage();
+					FXMLLoader loader  = new FXMLLoader(getClass().getResource("/result/result.fxml"));
+					Parent root;
+					try {
+						root = (Parent)loader.load();
+						Scene scene = new Scene(root);
+						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+						
+						primaryStage.setTitle("Report");
+						primaryStage.setScene(scene);
+						primaryStage.show(); 
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					//screen
+					
+					
+				//   System.out.println( tableview.getSelectionModel().getSelectedItem());
+			  
+			   
+			   }});
+		
 		
 		save.setOnAction(event -> {
 	            SaveData data = new SaveData();
@@ -488,10 +554,19 @@ public void resultview() throws IOException {
 	primaryStage.setTitle("Report");
 	primaryStage.setScene(scene);
 	primaryStage.show();*/
-
 	
 }
 
+public void table_rowAdd() {
+	
+	tableview.getItems().add(new ActionClass(" "," "," "," "));
+}
 
+
+public void table_rowdelete() {
+	
+	 ActionClass selectedItem = tableview.getSelectionModel().getSelectedItem();
+	 tableview.getItems().remove(selectedItem);
+}
 	
 }
